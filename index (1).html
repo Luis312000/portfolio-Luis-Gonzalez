@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luis Carlos Gonzalez — Senior Account Manager & Tech Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0c0c0e;
+      --surface: #111114;
+      --surface2: #17171c;
+      --border: #222228;
+      --accent: #00e57a;
+      --accent2: #00b85e;
+      --text: #f0f0f5;
+      --muted: #6b6b80;
+      --red: #e74c3c;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(12,12,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 50%, rgba(0,229,122,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,229,122,0.04) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,122,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,122,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content { position: relative; max-width: 800px; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.2s forwards;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--accent);
+    }
+
+    h1.hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 10vw, 120px);
+      line-height: 0.9;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.4s forwards;
+    }
+
+    h1.hero-name span { color: var(--accent); }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.6s forwards;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.8s forwards;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      padding: 14px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 14px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px; left: 60px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeUp 0.6s ease 1.2s forwards;
+    }
+
+    .scroll-line {
+      width: 40px; height: 1px;
+      background: var(--muted);
+      animation: scrollPulse 2s ease infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { width: 40px; opacity: 0.5; }
+      50% { width: 60px; opacity: 1; }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 100px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--accent);
+    }
+
+    h2.section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: 1px;
+      margin-bottom: 60px;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      opacity: 0.3;
+    }
+
+    .about-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -24px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .about-img-wrap img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+      filter: grayscale(20%);
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--surface2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-text p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-top: 4px; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--surface); border-radius: 0; padding: 100px 0; max-width: 100%; }
+    #skills > .inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,229,122,0.1);
+    }
+
+    .skill-icon {
+      font-size: 36px;
+      margin-bottom: 14px;
+      display: block;
+      color: var(--accent);
+    }
+
+    .skill-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .skill-level {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .skill-bar {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      width: 0;
+      transition: width 1.2s ease;
+    }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; padding-left: 32px; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 52px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.5s ease;
+    }
+
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+
+    .timeline-dot {
+      position: absolute;
+      left: -38px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(0,229,122,0.15);
+    }
+
+    .timeline-date {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .timeline-company {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .timeline-role {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .timeline-list { list-style: none; }
+    .timeline-list li {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+    .timeline-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,229,122,0.08);
+    }
+
+    .project-thumb {
+      height: 180px;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, var(--surface) 100%);
+    }
+
+    .project-body { padding: 24px; }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .project-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(0,229,122,0.08);
+      border: 1px solid rgba(0,229,122,0.2);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .project-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .project-links { display: flex; gap: 12px; }
+
+    .project-link {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 10px; }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-group { margin-bottom: 12px; }
+
+    .cert-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .cert-header:hover { border-color: var(--accent); }
+    .cert-group.open .cert-header { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-color: var(--accent); }
+
+    .cert-header-left { display: flex; align-items: center; gap: 14px; }
+    .cert-icon { font-size: 20px; }
+
+    .cert-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .cert-count {
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--surface2);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .cert-chevron {
+      color: var(--muted);
+      font-size: 12px;
+      transition: transform 0.3s;
+    }
+    .cert-group.open .cert-chevron { transform: rotate(180deg); color: var(--accent); }
+
+    .cert-body {
+      display: none;
+      background: var(--surface2);
+      border: 1px solid var(--accent);
+      border-top: none;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      padding: 8px 0;
+    }
+    .cert-group.open .cert-body { display: block; }
+
+    .cert-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .cert-item:last-child { border-bottom: none; }
+    .cert-item:hover { background: rgba(0,229,122,0.03); }
+
+    .cert-item-name { font-size: 13px; color: var(--text); }
+    .cert-item-date {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      margin-left: 16px;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--surface);
+      max-width: 100%;
+      padding: 100px 0;
+    }
+
+    #contact > .inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .contact-left h2 { margin-bottom: 20px; }
+
+    .contact-left p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .contact-items { display: flex; flex-direction: column; gap: 16px; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
+
+    .contact-item-icon {
+      width: 40px; height: 40px;
+      background: rgba(0,229,122,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .contact-item-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+    .contact-item-value { font-size: 14px; color: var(--text); font-weight: 500; }
+
+    .contact-right {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+    .form-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 8px; }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+    .form-textarea { min-height: 120px; resize: vertical; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .form-submit:hover { background: var(--accent2); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      #hero { padding: 100px 24px 60px; }
+      section { padding: 60px 24px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-img-wrap { max-width: 300px; margin: 0 auto; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 30px 24px; }
+      #skills > .inner, #contact > .inner { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#hero" class="nav-logo">LG</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Open to B2B Sales & Management roles</div>
+    <h1 class="hero-name">Luis Carlos<br><span>Gonzalez</span></h1>
+    <p class="hero-desc">Senior Account Manager · Six Sigma Black Belt · Bilingual Tech Specialist (ENG/SPA) · Based in Guatemala City.</p>
+    <div class="hero-btns">
+      <a href="Luis_Carlos_Gonzalez_Alvarez.pdf" class="btn-primary" target="_blank">Download Resume</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-label">Who I Am</div>
+  <h2 class="section-title">About Me</h2>
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <img src="profesional.jpg" alt="Luis Carlos Gonzalez" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="about-img-placeholder" style="display:none;">👨‍💻</div>
+    </div>
+    <div class="about-text reveal">
+      <p>I'm a <strong>results-driven Senior Account Manager</strong> with expertise in B2B sales, complex negotiation, and disciplined pipeline management. I thrive in high-performance environments where data-driven decisions create real commercial impact.</p>
+      <p>Currently pursuing a <strong>Bachelor's degree in Computer Engineering</strong> at Universidad Mariano Gálvez, while holding a Six Sigma Black Belt certification and a C1 Advanced English certificate (EF SET 64/100).</p>
+      <p>My goal is to leverage my expertise in B2B sales and management to drive significant revenue growth and long-term client retention — securing big deals and making a substantial impact on organizational success.</p>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">40+</div>
+          <div class="stat-label">Certifications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Companies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="inner">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <span class="skill-icon"><i class="fa-solid fa-briefcase"></i></span>
+        <div class="skill-name">B2B Sales & Account Mgmt</div>
+        <div class="skill-level">Expert</div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon"><i class="fa-solid fa-handshake"></i></span>
+        <div class="skill-name">Negotiation & CRM</div>
+        <div class="skill-level">Expert</div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="93"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon"><i class="fa-solid fa-chart-bar"></i></span>
+        <div class="skill-name">Data Analysis</div>
+        <div class="skill-level">Advanced</div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="82"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon"><i class="fa-solid fa-database"></i></span>
+        <div class="skill-name">SQL (Server & Oracle)</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon"><i class="fa-solid fa-table-columns"></i></span>
+        <div class="skill-name">Tableau</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon"><i class="fa-solid fa-chart-line"></i></span>
+        <div class="skill-name">Six Sigma Black Belt</div>
+        <div class="skill-level">Certified</div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="88"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon"><i class="fa-solid fa-diagram-project"></i></span>
+        <div class="skill-name">CAPM Project Mgmt</div>
+        <div class="skill-level">Certified</div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon"><i class="fa-brands fa-html5"></i></span>
+        <div class="skill-name">HTML / CSS</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon"><i class="fa-solid fa-people-group"></i></span>
+        <div class="skill-name">Team Leadership</div>
+        <div class="skill-level">Advanced</div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon"><i class="fa-solid fa-language"></i></span>
+        <div class="skill-name">English / Spanish</div>
+        <div class="skill-level">C1 Bilingual</div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="100"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="section-label">Career Path</div>
+  <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">July 2024 — July 2025</div>
+        <div class="timeline-company">Conduent — Outsourced for Groupon</div>
+        <div class="timeline-role">Senior Account Manager, Sales & Retention</div>
+        <ul class="timeline-list">
+          <li>Managed a high-value Book of Business for the North American market, consistently exceeding all assigned KPIs and maximizing Gross Profit through data analysis and long-term merchant retention.</li>
+          <li>Executed full-cycle outbound B2B sales, negotiating and closing deals with major national brands including Domino's and Taco Bell.</li>
+          <li>Built strategic trust with executive-level clients, using performance data to provide actionable, data-driven insights that optimize commercial success on the platform.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">September 2021 — July 2024</div>
+        <div class="timeline-company">Conduent</div>
+        <div class="timeline-role">Team Leader, Operations & Customer Resolution</div>
+        <ul class="timeline-list">
+          <li>Led and coached a service team specializing in complex, escalated customer issues (Tier 3/Resolution).</li>
+          <li>Temporarily served as Supervisor, overseeing team performance, conducting coaching sessions, and ensuring strict adherence to operational metrics and quality standards.</li>
+          <li>Applied leadership and conflict resolution skills to maintain stability in a high-volume BPO environment.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">July 2020 — August 2021</div>
+        <div class="timeline-company">Telus</div>
+        <div class="timeline-role">Content Moderator, Trust & Safety</div>
+        <ul class="timeline-list">
+          <li>Processed 100+ high-priority user reports daily across the Hinger application, enforcing platform trust and safety.</li>
+          <li>Identified and banned scam and fraudulent accounts, directly protecting the user community.</li>
+          <li>Demonstrated proficiency in quick-fire decision-making and strict policy application under high-pressure scenarios.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">February 2019 — July 2020</div>
+        <div class="timeline-company">ICS</div>
+        <div class="timeline-role">Supervisor & Level 3 Customer Specialist</div>
+        <ul class="timeline-list">
+          <li>Promoted to Level 3 Support, handling the most complex and critical customer issues.</li>
+          <li>Assigned as temporary Supervisor during the pandemic, maintaining team stability and service levels.</li>
+          <li>Consistently recognized as top performer for five consecutive months due to exceptional service quality and resolution speed.</li>
+        </ul>
+      </div>
+
+    </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="section-label">What I've Built</div>
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-thumb">🧾</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">HTML</span>
+          <span class="project-tag">CSS</span>
+          <span class="project-tag">JavaScript</span>
+        </div>
+        <div class="project-title">ReSupply Sales Script</div>
+        <p class="project-desc">Interactive sales script tool for donation pickup agents. Features accordion steps, search with keyword highlighting, dark mode, and call progress tracking.</p>
+        <div class="project-links">
+          <a href="#" class="project-link"><i class="fa-solid fa-arrow-right"></i> Live Demo</a>
+          <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-thumb">👤</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">HTML</span>
+          <span class="project-tag">CSS</span>
+          <span class="project-tag">Netlify</span>
+        </div>
+        <div class="project-title">Portfolio Website</div>
+        <p class="project-desc">Personal portfolio showcasing professional experience, skills, certifications, and projects. Fully responsive with dark theme and smooth animations.</p>
+        <div class="project-links">
+          <a href="https://profound-clafoutis-a12e57.netlify.app/" target="_blank" class="project-link"><i class="fa-solid fa-arrow-right"></i> Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-thumb">🔜</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">Coming Soon</span>
+        </div>
+        <div class="project-title">Next Project</div>
+        <p class="project-desc">Currently working on new projects as part of my Computer Engineering studies. Check back soon for updates.</p>
+        <div class="project-links">
+          <a href="#contact" class="project-link"><i class="fa-solid fa-envelope"></i> Stay in touch</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CERTIFICATIONS ── -->
+<section id="certifications">
+  <div class="section-label">Professional Development</div>
+  <h2 class="section-title">Certifications</h2>
+
+  <!-- Group 1 -->
+  <div class="cert-group reveal">
+    <div class="cert-header" onclick="toggleCert(this)">
+      <div class="cert-header-left">
+        <span class="cert-icon">📊</span>
+        <span class="cert-title">Technical & Data Analysis</span>
+        <span class="cert-count">9 certs</span>
+      </div>
+      <i class="fa-solid fa-chevron-down cert-chevron"></i>
+    </div>
+    <div class="cert-body">
+      <div class="cert-item"><span class="cert-item-name">SQL Server for Data Analysis – Alison</span><span class="cert-item-date">Oct 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Tableau Software – Alison</span><span class="cert-item-date">Sep 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Microsoft Excel Formulas and Functions – Alison</span><span class="cert-item-date">Oct 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Oracle Database 12c R2 SQL – Data Manipulation & Transaction Control – Skillsoft</span><span class="cert-item-date">Feb 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Oracle Database 12c R2 SQL – Basic SELECT Statements – Skillsoft</span><span class="cert-item-date">Feb 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Oracle Database 12c R2 SQL – Displaying Data from Multiple Tables – Skillsoft</span><span class="cert-item-date">Mar 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Oracle Database 12c R2 SQL – Managing Objects – Skillsoft</span><span class="cert-item-date">May 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Oracle Database 12c R2 SQL – Using Set Operators – Skillsoft</span><span class="cert-item-date">May 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Introduction to HTML and CSS – Alison</span><span class="cert-item-date">Jun 2025</span></div>
+    </div>
+  </div>
+
+  <!-- Group 2 -->
+  <div class="cert-group reveal">
+    <div class="cert-header" onclick="toggleCert(this)">
+      <div class="cert-header-left">
+        <span class="cert-icon">⚙️</span>
+        <span class="cert-title">Six Sigma Black Belt Series (30+ Modules)</span>
+        <span class="cert-count">30+ certs</span>
+      </div>
+      <i class="fa-solid fa-chevron-down cert-chevron"></i>
+    </div>
+    <div class="cert-body">
+      <div class="cert-item"><span class="cert-item-name">Lean and Six Sigma Fundamentals</span><span class="cert-item-date">Mar 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Leadership and Change Management</span><span class="cert-item-date">Mar 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Process Management and Measures</span><span class="cert-item-date">Mar 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Team Roles and Facilitation</span><span class="cert-item-date">Mar 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Voice of the Customer (VOC)</span><span class="cert-item-date">Mar 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Business Case, Project Charter, and PM Tools</span><span class="cert-item-date">Mar 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Analytical Tools</span><span class="cert-item-date">Mar 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Analyzing Process Flows and Key Performance Metrics</span><span class="cert-item-date">Mar 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Data Collection</span><span class="cert-item-date">Mar 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Basic Statistics</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Probability</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Process Capability</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Hypothesis Testing</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Analysis of Variance (ANOVA) Tests</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Risk Analysis and Management</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Statistical Process Control (SPC)</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Design For Six Sigma (DFSS) Framework and Methodologies</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Lean Methodologies and Strategic Execution</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Lean Control Tools</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Maintaining Long-Term Process Gains</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Ensuring Accuracy with Measurement and Metrology</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Assessing and Modeling Variable Interactions</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Understanding Design of Experiments (DOE)</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Factorial Experiments</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Building Collaborative Teams and Facilitating Growth</span><span class="cert-item-date">Mar 2025</span></div>
+    </div>
+  </div>
+
+  <!-- Group 3 -->
+  <div class="cert-group reveal">
+    <div class="cert-header" onclick="toggleCert(this)">
+      <div class="cert-header-left">
+        <span class="cert-icon">📋</span>
+        <span class="cert-title">Project Management & Business Strategy</span>
+        <span class="cert-count">6 certs</span>
+      </div>
+      <i class="fa-solid fa-chevron-down cert-chevron"></i>
+    </div>
+    <div class="cert-body">
+      <div class="cert-item"><span class="cert-item-name">CAPM®: Project Management Key Concepts – Skillsoft</span><span class="cert-item-date">May 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">CAPM®: Project Lifecycles – Skillsoft</span><span class="cert-item-date">Jun 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">CAPM®: Project Roles & Responsibilities – Skillsoft</span><span class="cert-item-date">Jun 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">ISO 9001:2015 Quality Management System (SGC) – Alison</span><span class="cert-item-date">Jun 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Professional in HR: Business Environment – Skillsoft</span><span class="cert-item-date">Apr 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Senior Professional in HR: Safety and Health – Skillsoft</span><span class="cert-item-date">Apr 2025</span></div>
+    </div>
+  </div>
+
+  <!-- Group 4 -->
+  <div class="cert-group reveal">
+    <div class="cert-header" onclick="toggleCert(this)">
+      <div class="cert-header-left">
+        <span class="cert-icon">🚀</span>
+        <span class="cert-title">Sales, Leadership & Professional Development</span>
+        <span class="cert-count">8 certs</span>
+      </div>
+      <i class="fa-solid fa-chevron-down cert-chevron"></i>
+    </div>
+    <div class="cert-body">
+      <div class="cert-item"><span class="cert-item-name">Sales Force Management – Alison</span><span class="cert-item-date">Oct 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">EF SET English Certificate 64/100 – C1 Advanced – EF SET</span><span class="cert-item-date">Jun 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Turning Objection into Opportunity during a Sales Call – Skillsoft</span><span class="cert-item-date">Jul 2024</span></div>
+      <div class="cert-item"><span class="cert-item-name">Building Your Emotional Intelligence as a Leader – Skillsoft</span><span class="cert-item-date">Feb 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Leadership Insights on Coaching – Skillsoft</span><span class="cert-item-date">Nov 2024</span></div>
+      <div class="cert-item"><span class="cert-item-name">Confronting Workplace Conflict – Skillsoft</span><span class="cert-item-date">Feb 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Polishing Your Feedback Skills – Skillsoft</span><span class="cert-item-date">Feb 2025</span></div>
+      <div class="cert-item"><span class="cert-item-name">Designing a Customer Service Strategy – Skillsoft</span><span class="cert-item-date">Dec 2022</span></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="inner">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <div class="section-label">Let's Talk</div>
+        <h2 class="section-title">Hire Me</h2>
+        <p>I'm available for new projects and opportunities. Whether you need a developer, a sales specialist, or a team lead — let's connect.</p>
+        <div class="contact-items">
+          <a href="/cdn-cgi/l/email-protection#91fde4f8e2f2f0e3fdfef6f0d1f6fcf0f8fdbff2fefc" class="contact-item">
+            <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value"><span class="__cf_email__" data-cfemail="5a362f3329393b2836353d3b1a3d373b333674393537">[email&#160;protected]</span></div>
+            </div>
+          </a>
+          <a href="tel:+50231552746" class="contact-item">
+            <div class="contact-item-icon"><i class="fa-solid fa-phone"></i></div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <div class="contact-item-value">(502) 31552746</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/luis-gonzalezz" target="_blank" class="contact-item">
+            <div class="contact-item-icon"><i class="fa-brands fa-linkedin"></i></div>
+            <div>
+              <div class="contact-item-label">LinkedIn</div>
+              <div class="contact-item-value">linkedin.com/in/luis-gonzalezz</div>
+            </div>
+          </a>
+          <a href="#" class="contact-item">
+            <div class="contact-item-icon"><i class="fa-brands fa-github"></i></div>
+            <div>
+              <div class="contact-item-label">GitHub</div>
+              <div class="contact-item-value">View my code</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right reveal">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-input" placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="john@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell me about your project or opportunity..."></textarea>
+        </div>
+        <button class="form-submit">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">LG</div>
+  <div>© 2025 Luis Gonzalez. Built with ❤️ in Guatemala.</div>
+  <div style="display:flex; gap:20px;">
+    <a href="/cdn-cgi/l/email-protection#315d4458425250435d5e565071565c50585d1f525e5c" style="color:var(--muted); font-size:18px; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'"><i class="fa-solid fa-envelope"></i></a>
+    <a href="https://www.linkedin.com/in/luis-gonzalezz" target="_blank" style="color:var(--muted); font-size:18px; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'"><i class="fa-brands fa-linkedin"></i></a>
+    <a href="#" style="color:var(--muted); font-size:18px; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'"><i class="fa-brands fa-github"></i></a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal, .timeline-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Skill bars on scroll
+  const skillBars = document.querySelectorAll('.skill-bar-fill');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.width = entry.target.dataset.width + '%';
+      }
+    });
+  }, { threshold: 0.3 });
+  skillBars.forEach(bar => barObserver.observe(bar));
+
+  // Certifications accordion
+  function toggleCert(header) {
+    const group = header.parentElement;
+    group.classList.toggle('open');
+  }
+
+  // Active nav link highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 100) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
